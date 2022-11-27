@@ -1,0 +1,27 @@
+<?php
+/**
+ * @package Goomento_PageBuilderSampleData
+ * @link https://github.com/Goomento/PageBuilderSampleData
+ */
+
+declare(strict_types=1);
+
+use Goomento\PageBuilderSampleData\Builder\Widgets\HelloWorld;
+use Goomento\PageBuilder\Block\View\Element\Widget;
+
+/**
+ * @var Widget $block
+ * @var HelloWorld $widget
+ * @var array $settings
+ */
+
+$widget = $block->getWidget();
+$settings = $block->getSettingsForDisplay();
+
+/**
+ * `hello-world-name` is the key, which is set in the `registerControls`
+ * @see Goomento\PageBuilderSampleData\Builder\Widgets\HelloWorld::registerControls()
+ */
+if (!empty($settings['hello-world-name'])): ?>
+    <p class="hello-world"><?= $block->escapeHtml(__('Hello World! My name is %1', $settings['hello-world-name'])) ?></p>
+<?php endif;
