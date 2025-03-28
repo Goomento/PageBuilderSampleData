@@ -13,12 +13,5 @@
             </argument>
         </arguments>
     </type>
-    <type name="Goomento\PageBuilder\Model\LocalSampleCollection">
-        <arguments>
-            <argument name="samples" xsi:type="array">
-                <item name="luma" xsi:type="string">Goomento\PageBuilderSampleData\Samples\Luma</item>
-            </argument>
-        </arguments>
-    </type>
 </config>
 

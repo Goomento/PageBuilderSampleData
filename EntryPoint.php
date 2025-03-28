@@ -7,60 +7,29 @@ declare(strict_types=1);
 
 namespace Goomento\PageBuilderSampleData;
 
-use Goomento\PageBuilderSampleData\Builder\Widgets\HelloWorld;
-use Goomento\PageBuilder\Builder\Managers\Elements;
-use Goomento\PageBuilder\Builder\Managers\Widgets;
 use Goomento\PageBuilder\BuilderRegister;
-use Goomento\PageBuilder\Helper\ThemeHelper;
+use Goomento\PageBuilder\Helper\HooksHelper;
+use Goomento\PageBuilder\Model\LocalSampleCollection;
+use Goomento\PageBuilderSampleData\Samples\Luma;
 
 class EntryPoint extends BuilderRegister
 {
     /**
-     * Add widget categories, where is grouping the similar widget types
-     *
+     * @inheritDoc
      */
-    public function registerWidgetCategories(Elements $elements)
+    public function init(array $buildSubject = [])
     {
-        $elements->addCategory('sampledata', [
-            'title' => __('Sample Data'),
-        ]);
+        HooksHelper::addAction('pagebuilder/samples/sample_registered', [$this, 'addSamples']);
     }
 
     /**
-     * Add to queue your css files, that can be used by widget or theme later
+     * Add Luma sample to collection
      *
+     * @param LocalSampleCollection $collection
      * @return void
      */
-    public function registerStyles()
+    public function addSamples(LocalSampleCollection $collection)
     {
-        ThemeHelper::registerStyle(
-            'pagebuilder-sample-data-widget',
-            'Goomento_PageBuilderSampleData/css/widget.css'
-        );
-    }
-
-    /**
-     * Add to queue your js files, that can be used by widget
-     *
-     * @return void
-     */
-    public function registerScripts()
-    {
-        ThemeHelper::registerScript(
-            'pagebuilder-sample-data-bubbling',
-            'Goomento_PageBuilderSampleData/js/bubbling'
-        );
-    }
-
-    /**
-     * Add your widgets to be used here
-     *
-     * @see Widgets::registerWidgetType()
-     */
-    public function registerWidgets(Widgets $widgetsManager)
-    {
-        $widgetsManager->registerWidgetType(
-            HelloWorld::class
-        );
+        $collection->setSample('luma', Luma::class);
     }
 }
